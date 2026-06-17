@@ -843,7 +843,7 @@ body.light .rp-ctx { color: #889; }
     <h2 id="about-h">WienSim — Impressum & Info</h2>
     <p><b>WienSim</b> ist eine inoffizielle, unabhängige Visualisierung des Wiener öffentlichen Verkehrs. Kein Zusammenhang mit Wiener Linien. · Unofficial, independent project — not affiliated with Wiener Linien. · Gayriresmî, bağımsız bir projedir; Wiener Linien ile bağlantılı değildir.</p>
     <h3>Datenquelle / Data / Veri</h3>
-    <p>ÖPNV: <a href="https://data.wien.gv.at" target="_blank" rel="noopener">Stadt Wien / Wiener Linien</a> (CC BY 4.0). Flugzeuge: <a href="https://adsb.lol" target="_blank" rel="noopener">adsb.lol</a> (Community ADS-B). Karte: © CARTO, © OpenStreetMap. Fahrzeugpositionen sind simuliert; Schiffe sind simuliert. Für echte Infos die Wiener Linien / ÖBB nutzen.</p>
+    <p>ÖPNV: <a href="https://data.wien.gv.at" target="_blank" rel="noopener">Stadt Wien / Wiener Linien</a> &amp; <a href="https://data.oebb.at" target="_blank" rel="noopener">ÖBB</a> (CC BY 4.0). Flugzeuge: <a href="https://adsb.lol" target="_blank" rel="noopener">adsb.lol</a> (Community ADS-B). Karte: © CARTO, © OpenStreetMap. Fahrzeugpositionen sind simuliert; Schiffe sind simuliert. Für echte Infos die Wiener Linien / ÖBB nutzen.</p>
     <h3>Datenschutz / Privacy / Gizlilik</h3>
     <p>Keine personenbezogenen Daten werden gespeichert. Einstellungen (Sprache, Favoriten) bleiben lokal im Browser (localStorage). Standort wird nur auf Anfrage genutzt und nicht gespeichert. Fehlerberichte werden via Formspree übermittelt.</p>
     <p>No personal data is collected. Preferences stay local (localStorage). Location is used only on request and not stored. · Kişisel veri toplanmaz; tercihler tarayıcıda yerel kalır, konum yalnızca istek üzerine kullanılır.</p>
@@ -929,64 +929,510 @@ const LINES = [
     ['Erlaaer Straße',16.3090,48.1500],['Perfektastraße',16.3050,48.1440],['Siebenhirten',16.3010,48.1380]
   ]),
 
-  /* ---------- S-BAHN ---------- */
-  mkLine('s-stamm', 'S1', 'Stammstrecke (Floridsdorf – Meidling)', 'sbahn', C.sbahn, '#fff', [
-    ['Floridsdorf',16.4010,48.2565],['Handelskai',16.3855,48.2420],['Traisengasse',16.3800,48.2350],
-    ['Praterstern',16.3920,48.2180],['Wien Mitte-Landstraße',16.3850,48.2060],['Rennweg',16.3880,48.1970],
-    ['Quartier Belvedere',16.3780,48.1900],['Hauptbahnhof',16.3760,48.1850],['Matzleinsdorfer Platz',16.3550,48.1800],
-    ['Meidling',16.3270,48.1740]
+  /* ---------- ÖBB S-BAHN / REX / CJX / R (GTFS 2025/26, ÖBB Open Data CC BY 4.0) ---------- */
+  mkLine('oebb-s1', 'S1', "Bad Vöslau – Leopoldau", 'sbahn', '#2895BD', '#fff', [
+    ["Bad Vöslau",16.22401,47.96988],
+    ["Baden",16.24267,48.00389],
+    ["Pfaffstätten",16.25886,48.01802],
+    ["Gumpoldskirchen",16.28445,48.0405],
+    ["Guntramsdorf Thallern",16.29724,48.05168],
+    ["Mödling",16.29545,48.08634],
+    ["Brunn-Maria Enzersdorf",16.28809,48.10552],
+    ["Perchtoldsdorf",16.28552,48.12265],
+    ["Liesing",16.28429,48.13468],
+    ["Atzgersdorf",16.28866,48.14702],
+    ["Hetzendorf",16.31506,48.16651],
+    ["Meidling",16.33373,48.17462],
+    ["Matzleinsdorfer Platz",16.35796,48.18013],
+    ["Hauptbahnhof",16.37515,48.18597],
+    ["Quartier Belvedere",16.38214,48.18801],
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38443,48.20563],
+    ["Praterstern",16.39245,48.21884],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40016,48.2563],
+    ["Siemensstraße",16.42083,48.27092],
+    ["Leopoldau",16.44994,48.27772]
   ]),
-  mkLine('s2', 'S2', 'Liesing – Floridsdorf – Gerasdorf', 'sbahn', C.sbahn, '#fff', [
-    ['Liesing',16.2850,48.1380],['Atzgersdorf',16.2960,48.1570],['Hetzendorf',16.3110,48.1660],
-    ['Meidling',16.3270,48.1740],['Matzleinsdorfer Platz',16.3550,48.1800],['Hauptbahnhof',16.3760,48.1850],
-    ['Quartier Belvedere',16.3780,48.1900],['Rennweg',16.3880,48.1970],['Wien Mitte-Landstraße',16.3850,48.2060],
-    ['Praterstern',16.3920,48.2180],['Traisengasse',16.3800,48.2350],['Handelskai',16.3855,48.2420],
-    ['Floridsdorf',16.4010,48.2565],['Siemensstraße',16.4125,48.2700],['Leopoldau',16.4505,48.2775],
-    ['Gerasdorf',16.4660,48.2950]
+  mkLine('oebb-s2', 'S2', "Bad Vöslau – Ulrichskirchen", 'sbahn', '#288FBD', '#fff', [
+    ["Bad Vöslau",16.22401,47.96988],
+    ["Baden",16.24267,48.00389],
+    ["Pfaffstätten",16.25886,48.01802],
+    ["Gumpoldskirchen",16.28445,48.0405],
+    ["Guntramsdorf Thallern",16.29724,48.05168],
+    ["Mödling",16.29554,48.08636],
+    ["Brunn-Maria Enzersdorf",16.28809,48.10552],
+    ["Perchtoldsdorf",16.28552,48.12265],
+    ["Liesing",16.28429,48.13468],
+    ["Atzgersdorf",16.28866,48.14702],
+    ["Hetzendorf",16.31506,48.16651],
+    ["Meidling",16.33373,48.17462],
+    ["Matzleinsdorfer Platz",16.35796,48.18013],
+    ["Hauptbahnhof",16.37515,48.18597],
+    ["Quartier Belvedere",16.38214,48.18801],
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38458,48.20558],
+    ["Praterstern",16.39245,48.21884],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40004,48.25634],
+    ["Siemensstraße",16.42083,48.27092],
+    ["Leopoldau",16.44998,48.27765],
+    ["Gerasdorf",16.48396,48.29388],
+    ["Kapellerfeld",16.49515,48.31691],
+    ["Seyring",16.50161,48.33021],
+    ["Obersdorf",16.51662,48.36212],
+    ["Wolkersdorf",16.51243,48.37902],
+    ["Ulrichskirchen",16.48812,48.40208]
   ]),
-  mkLine('s3', 'S3', 'Liesing – Floridsdorf – Strebersdorf', 'sbahn', C.sbahn, '#fff', [
-    ['Liesing',16.2850,48.1380],['Atzgersdorf',16.2960,48.1570],['Hetzendorf',16.3110,48.1660],
-    ['Meidling',16.3270,48.1740],['Matzleinsdorfer Platz',16.3550,48.1800],['Hauptbahnhof',16.3760,48.1850],
-    ['Quartier Belvedere',16.3780,48.1900],['Rennweg',16.3880,48.1970],['Wien Mitte-Landstraße',16.3850,48.2060],
-    ['Praterstern',16.3920,48.2180],['Traisengasse',16.3800,48.2350],['Handelskai',16.3855,48.2420],
-    ['Floridsdorf',16.4010,48.2565],['Brünner Straße',16.4010,48.2690],['Jedlersdorf',16.3950,48.2770],
-    ['Strebersdorf',16.3830,48.2830]
+  mkLine('oebb-s3', 'S3', "Bad Vöslau – Oberolberndorf", 'sbahn', '#2889BD', '#fff', [
+    ["Bad Vöslau",16.22401,47.96988],
+    ["Baden",16.24267,48.00389],
+    ["Pfaffstätten",16.25886,48.01802],
+    ["Gumpoldskirchen",16.28445,48.0405],
+    ["Guntramsdorf Thallern",16.29724,48.05168],
+    ["Mödling",16.29554,48.08636],
+    ["Brunn-Maria Enzersdorf",16.28809,48.10552],
+    ["Perchtoldsdorf",16.28552,48.12265],
+    ["Liesing",16.28429,48.13468],
+    ["Atzgersdorf",16.28866,48.14702],
+    ["Hetzendorf",16.31506,48.16651],
+    ["Meidling",16.33373,48.17462],
+    ["Matzleinsdorfer Platz",16.35796,48.18013],
+    ["Hauptbahnhof",16.37515,48.18597],
+    ["Quartier Belvedere",16.38214,48.18801],
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38443,48.20563],
+    ["Praterstern",16.39245,48.21884],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40004,48.25634],
+    ["Brünner Straße",16.40346,48.26794],
+    ["Jedlersdorf",16.39684,48.27332],
+    ["Strebersdorf",16.3812,48.28602],
+    ["Langenzersdorf",16.35614,48.30638],
+    ["Bisamberg",16.34733,48.31634],
+    ["Korneuburg",16.32857,48.34346],
+    ["Leobendorf-Burg Kreuzenstein Bhf.",16.30205,48.36456],
+    ["Spillern",16.25686,48.37581],
+    ["Stockerau",16.21412,48.38227],
+    ["Oberolberndorf",16.17362,48.41398]
   ]),
-  mkLine('s4', 'S4', 'Meidling – Floridsdorf – Jedlersdorf', 'sbahn', C.sbahn, '#fff', [
-    ['Meidling',16.3270,48.1740],['Matzleinsdorfer Platz',16.3550,48.1800],['Hauptbahnhof',16.3760,48.1850],
-    ['Quartier Belvedere',16.3780,48.1900],['Rennweg',16.3880,48.1970],['Wien Mitte-Landstraße',16.3850,48.2060],
-    ['Praterstern',16.3920,48.2180],['Traisengasse',16.3800,48.2350],['Handelskai',16.3855,48.2420],
-    ['Floridsdorf',16.4010,48.2565],['Brünner Straße',16.4010,48.2690],['Jedlersdorf',16.3950,48.2770]
+  mkLine('oebb-s4', 'S4', "Gaisruck – Bad Vöslau", 'sbahn', '#2883BD', '#fff', [
+    ["Gaisruck",16.06528,48.39405],
+    ["Hausleiten",16.10837,48.39121],
+    ["Stockerau",16.21411,48.38222],
+    ["Spillern",16.25685,48.37578],
+    ["Leobendorf-Burg Kreuzenstein Bhf.",16.30195,48.3645],
+    ["Korneuburg",16.32852,48.34345],
+    ["Bisamberg",16.34725,48.31632],
+    ["Langenzersdorf",16.35608,48.30635],
+    ["Strebersdorf",16.38108,48.28598],
+    ["Jedlersdorf",16.39678,48.27329],
+    ["Brünner Straße",16.4034,48.26789],
+    ["Floridsdorf",16.3998,48.25642],
+    ["Handelskai",16.38523,48.24202],
+    ["Traisengasse",16.38375,48.23436],
+    ["Praterstern",16.39182,48.2188],
+    ["Wien Mitte-Landstraße",16.3842,48.20569],
+    ["Rennweg",16.38601,48.19525],
+    ["Quartier Belvedere",16.38213,48.18809],
+    ["Hauptbahnhof",16.37507,48.18605],
+    ["Matzleinsdorfer Platz",16.35791,48.18023],
+    ["Meidling",16.33371,48.17468],
+    ["Hetzendorf",16.315,48.16656],
+    ["Atzgersdorf",16.2885,48.14705],
+    ["Liesing",16.28408,48.13468],
+    ["Perchtoldsdorf",16.28559,48.12266],
+    ["Brunn-Maria Enzersdorf",16.288,48.10552],
+    ["Mödling",16.29533,48.08631],
+    ["Guntramsdorf Thallern",16.29717,48.05172],
+    ["Gumpoldskirchen",16.28438,48.04054],
+    ["Pfaffstätten",16.2587,48.01814],
+    ["Baden",16.24261,48.00394],
+    ["Bad Vöslau",16.22378,47.96987]
   ]),
-  mkLine('s7', 'S7', 'Floridsdorf – Flughafen Wien', 'sbahn', C.sbahn, '#fff', [
-    ['Floridsdorf',16.4010,48.2565],['Handelskai',16.3855,48.2420],['Traisengasse',16.3800,48.2350],
-    ['Praterstern',16.3920,48.2180],['Wien Mitte-Landstraße',16.3850,48.2060],['Rennweg',16.3880,48.1970],
-    ['St. Marx',16.4040,48.1880],['Kaiserebersdorf',16.4650,48.1580],['Schwechat',16.4710,48.1410],
-    ['Mannswörth',16.5030,48.1430],['Flughafen Wien',16.5610,48.1210]
+  mkLine('oebb-s7', 'S7', "Leopoldau – Maria Ellend", 'sbahn', '#287DBD', '#fff', [
+    ["Leopoldau",16.44994,48.27772],
+    ["Siemensstraße",16.42076,48.27098],
+    ["Floridsdorf",16.3998,48.25642],
+    ["Handelskai",16.38523,48.24202],
+    ["Traisengasse",16.38375,48.23436],
+    ["Praterstern",16.39182,48.2188],
+    ["Wien Mitte-Landstraße",16.38434,48.20565],
+    ["Rennweg",16.38601,48.19525],
+    ["St. Marx",16.3987,48.18837],
+    ["Geiselbergstraße",16.40709,48.17562],
+    ["Zentralfriedhof",16.42619,48.15391],
+    ["Kaiserebersdorf",16.46515,48.14591],
+    ["Schwechat",16.48153,48.14349],
+    ["Mannswörth",16.50774,48.13642],
+    ["Flughafen Wien",16.56431,48.12016],
+    ["Fischamend",16.61553,48.11635],
+    ["Maria Ellend",16.68826,48.10982]
   ]),
-  mkLine('s40', 'S40', 'Franz-Josefs-Bahnhof – Nußdorf', 'sbahn', C.sbahn, '#fff', [
-    ['Franz-Josefs-Bahnhof',16.3610,48.2260],['Spittelau',16.3585,48.2355],['Heiligenstadt',16.3650,48.2490],
-    ['Nußdorf',16.3705,48.2585]
+  mkLine('oebb-s40', 'S40', "Tulln – Franz-Josefs-Bahnhof", 'sbahn', '#2877BD', '#fff', [
+    ["Tulln",16.06435,48.3275],
+    ["Langenlebarn",16.12106,48.32749],
+    ["Muckendorf-Wipfing",16.15088,48.32826],
+    ["Zeiselmauer-Königstetten Bhf.",16.17574,48.32661],
+    ["St. Andrä-Wördern",16.20948,48.33417],
+    ["Greifenstein-Altenberg",16.23957,48.34474],
+    ["Höflein/Donau",16.27158,48.35009],
+    ["Kritzendorf",16.2994,48.33567],
+    ["Unterkritzendorf",16.30975,48.32365],
+    ["Klosterneuburg-Kierling",16.3261,48.3101],
+    ["Klosterneuburg-Weidling Bhf.",16.33504,48.29695],
+    ["Nußdorf",16.3678,48.26024],
+    ["Heiligenstadt",16.36552,48.24903],
+    ["Spittelau",16.35802,48.23532],
+    ["Franz-Josefs-Bahnhof",16.36092,48.22674]
   ]),
-  mkLine('s50', 'S50', 'Westbahnhof – Weidlingau', 'sbahn', C.sbahn, '#fff', [
-    ['Westbahnhof',16.3380,48.1965],['Penzing',16.2920,48.1990],['Hütteldorf',16.2640,48.1975],
-    ['Wolf in der Au',16.2450,48.1930],['Hadersdorf',16.2320,48.1930],['Weidlingau',16.2220,48.1950]
+  mkLine('oebb-s45', 'S45', "Hütteldorf – Handelskai", 'sbahn', '#2871BD', '#fff', [
+    ["Hütteldorf",16.26242,48.19734],
+    ["Penzing",16.30486,48.19273],
+    ["Breitensee",16.30662,48.19779],
+    ["Ottakring",16.31123,48.2118],
+    ["Hernals",16.31426,48.22292],
+    ["Gersthof",16.32915,48.23085],
+    ["Krottenbachstraße",16.34055,48.24003],
+    ["Oberdöbling",16.34409,48.24409],
+    ["Heiligenstadt",16.36574,48.24897],
+    ["Handelskai",16.38592,48.2421]
   ]),
-  mkLine('s60', 'S60', 'Meidling – Kledering', 'sbahn', C.sbahn, '#fff', [
-    ['Meidling',16.3270,48.1740],['Matzleinsdorfer Platz',16.3550,48.1800],['Hauptbahnhof',16.3760,48.1850],
-    ['Geiselbergstraße',16.4130,48.1760],['Grillgasse',16.4210,48.1690],['Kledering',16.4430,48.1430]
+  mkLine('oebb-s50', 'S50', "Westbahnhof – Tullnerbach-Pressbaum", 'sbahn', '#286BBD', '#fff', [
+    ["Westbahnhof",16.33667,48.19646],
+    ["Penzing",16.30486,48.19265],
+    ["Hütteldorf",16.26102,48.19762],
+    ["Wolf in der Au",16.23647,48.20482],
+    ["Hadersdorf",16.22226,48.21044],
+    ["Weidlingau",16.21178,48.21042],
+    ["Purkersdorf Sanatorium Bhf.",16.20073,48.20636],
+    ["Unterpurkersdorf",16.19063,48.20763],
+    ["Purkersdorf Zentrum",16.17533,48.20588],
+    ["Untertullnerbach",16.12831,48.1918],
+    ["Tullnerbach-Pressbaum",16.09326,48.18611]
   ]),
-  mkLine('s80', 'S80', 'Hütteldorf – Aspern Nord', 'sbahn', C.sbahn, '#fff', [
-    ['Hütteldorf',16.2640,48.1975],['Speising',16.2910,48.1730],['Hetzendorf',16.3110,48.1660],
-    ['Meidling',16.3270,48.1740],['Matzleinsdorfer Platz',16.3550,48.1800],['Hauptbahnhof',16.3760,48.1850],
-    ['Haidestraße',16.4280,48.1820],['Praterkai',16.4330,48.2040],['Stadlau',16.4455,48.2325],
-    ['Erzherzog-Karl-Straße',16.4495,48.2385],['Hirschstetten',16.4600,48.2405],['Hausfeldstraße',16.4830,48.2370],
-    ['Aspern Nord',16.4940,48.2345]
+  mkLine('oebb-s60', 'S60', "Sarasdorf – Ebreichsdorf", 'sbahn', '#2865BD', '#fff', [
+    ["Sarasdorf",16.6773,48.02327],
+    ["Trautmannsdorf/Leitha Bhf.",16.64355,48.02422],
+    ["Götzendorf",16.58569,48.02578],
+    ["Gramatneusiedl",16.48958,48.03584],
+    ["Lanzendorf-Rannersdorf",16.44754,48.1137],
+    ["Kledering",16.43885,48.13361],
+    ["Grillgasse",16.40701,48.16713],
+    ["Hauptbahnhof",16.37853,48.18507],
+    ["Meidling",16.33388,48.1743],
+    ["Blumental",16.36927,48.13903],
+    ["Hennersdorf",16.35829,48.11277],
+    ["Achau",16.37781,48.08099],
+    ["Münchendorf",16.38613,48.03225],
+    ["Ebreichsdorf",16.41916,47.96418]
   ]),
-  mkLine('s45', 'S45', 'Vorortelinie (Hütteldorf – Heiligenstadt)', 'sbahn', C.sbahn, '#fff', [
-    ['Hütteldorf',16.2640,48.1975],['Penzing',16.2920,48.1990],['Breitensee',16.3000,48.2060],
-    ['Ottakring',16.3115,48.2113],['Hernals',16.3230,48.2220],['Gersthof',16.3270,48.2320],
-    ['Krottenbachstraße',16.3420,48.2430],['Oberdöbling',16.3520,48.2450],['Heiligenstadt',16.3650,48.2490]
+  mkLine('oebb-s80', 'S80', "Aspern Nord – Hütteldorf", 'sbahn', '#285FBD', '#fff', [
+    ["Aspern Nord",16.50474,48.23473],
+    ["Hirschstetten",16.46911,48.23269],
+    ["Erzherzog-Karl-Straße",16.45367,48.23011],
+    ["Stadlau",16.44812,48.21869],
+    ["Praterkai",16.44108,48.19948],
+    ["Haidestraße",16.42622,48.17863],
+    ["Simmering",16.41872,48.16949],
+    ["Hauptbahnhof",16.37865,48.18533],
+    ["Matzleinsdorfer Platz",16.35791,48.18023],
+    ["Meidling",16.33366,48.17476],
+    ["Speising",16.28359,48.17356],
+    ["Hütteldorf",16.26081,48.19729]
+  ]),
+  mkLine('oebb-rex1', 'REX1', "Bad Vöslau – Gänserndorf", 'sbahn', '#259D6B', '#fff', [
+    ["Bad Vöslau",16.22401,47.96988],
+    ["Baden",16.24267,48.00389],
+    ["Mödling",16.29545,48.08634],
+    ["Liesing",16.28429,48.13468],
+    ["Meidling",16.33378,48.17453],
+    ["Matzleinsdorfer Platz",16.35796,48.18013],
+    ["Hauptbahnhof",16.37515,48.18597],
+    ["Quartier Belvedere",16.38214,48.18801],
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38443,48.20563],
+    ["Praterstern",16.39245,48.21884],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40016,48.2563],
+    ["Siemensstraße",16.42083,48.27092],
+    ["Leopoldau",16.44998,48.27765],
+    ["Deutsch-Wagram",16.56374,48.30294],
+    ["Gänserndorf",16.7349,48.34086]
+  ]),
+  mkLine('oebb-rex2', 'REX2', "Schleinbach – Meidling", 'sbahn', '#259D6D', '#fff', [
+    ["Schleinbach",16.48974,48.42247],
+    ["Wolkersdorf",16.51296,48.37777],
+    ["Leopoldau",16.44994,48.27772],
+    ["Siemensstraße",16.42076,48.27098],
+    ["Floridsdorf",16.39993,48.25638],
+    ["Handelskai",16.38523,48.24202],
+    ["Traisengasse",16.38375,48.23436],
+    ["Praterstern",16.39211,48.21883],
+    ["Wien Mitte-Landstraße",16.3842,48.20569],
+    ["Rennweg",16.38601,48.19525],
+    ["Quartier Belvedere",16.38213,48.18809],
+    ["Hauptbahnhof",16.37507,48.18605],
+    ["Matzleinsdorfer Platz",16.35791,48.18023],
+    ["Meidling",16.33371,48.17468]
+  ]),
+  mkLine('oebb-rex3', 'REX3', "Bad Vöslau – Hollabrunn", 'sbahn', '#259D70', '#fff', [
+    ["Bad Vöslau",16.22401,47.96988],
+    ["Baden",16.24267,48.00389],
+    ["Mödling",16.29545,48.08634],
+    ["Liesing",16.28429,48.13468],
+    ["Meidling",16.33378,48.17453],
+    ["Matzleinsdorfer Platz",16.35796,48.18013],
+    ["Hauptbahnhof",16.37515,48.18597],
+    ["Quartier Belvedere",16.38214,48.18801],
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38443,48.20563],
+    ["Praterstern",16.39182,48.2188],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40004,48.25634],
+    ["Korneuburg",16.32857,48.34346],
+    ["Stockerau",16.21412,48.38227],
+    ["Hollabrunn",16.07225,48.56305]
+  ]),
+  mkLine('oebb-rex4', 'REX4', "Tulln – Franz-Josefs-Bahnhof", 'sbahn', '#259D73', '#fff', [
+    ["Tulln",16.06446,48.32761],
+    ["Heiligenstadt",16.36552,48.24903],
+    ["Spittelau",16.35802,48.23532],
+    ["Franz-Josefs-Bahnhof",16.36123,48.22679]
+  ]),
+  mkLine('oebb-rex6', 'REX6', "Meidling – Bruck/Leitha", 'sbahn', '#259D75', '#fff', [
+    ["Meidling",16.33385,48.17438],
+    ["Hauptbahnhof",16.37834,48.18445],
+    ["Grillgasse",16.40707,48.16716],
+    ["Gramatneusiedl",16.48953,48.03577],
+    ["Bruck/Leitha",16.78145,48.01893]
+  ]),
+  mkLine('oebb-rex7', 'REX7', "Maria Ellend – Ulrichskirchen", 'sbahn', '#259D78', '#fff', [
+    ["Maria Ellend",16.68829,48.10975],
+    ["Fischamend",16.61553,48.11635],
+    ["Flughafen Wien",16.56443,48.12022],
+    ["Schwechat",16.4816,48.14355],
+    ["Kaiserebersdorf",16.46507,48.14596],
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38458,48.20558],
+    ["Praterstern",16.39222,48.21884],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40016,48.2563],
+    ["Siemensstraße",16.42083,48.27092],
+    ["Leopoldau",16.44998,48.27765],
+    ["Gerasdorf",16.48396,48.29388],
+    ["Kapellerfeld",16.49515,48.31691],
+    ["Seyring",16.50161,48.33021],
+    ["Obersdorf",16.51662,48.36212],
+    ["Wolkersdorf",16.51243,48.37902],
+    ["Ulrichskirchen",16.48812,48.40208]
+  ]),
+  mkLine('oebb-rex8', 'REX8', "Hauptbahnhof – Siebenbrunn-Leopoldsdorf", 'sbahn', '#259D7B', '#fff', [
+    ["Hauptbahnhof",16.37834,48.18445],
+    ["Simmering",16.41863,48.16956],
+    ["Stadlau",16.44829,48.21866],
+    ["Aspern Nord",16.50473,48.23479],
+    ["Siebenbrunn-Leopoldsdorf",16.70371,48.24555]
+  ]),
+  mkLine('oebb-rex9', 'REX9', "Meidling – Hauptbahnhof", 'sbahn', '#259D7D', '#fff', [
+    ["Meidling",16.33373,48.17462],
+    ["Matzleinsdorfer Platz",16.35796,48.18013],
+    ["Hauptbahnhof",16.37515,48.18597]
+  ]),
+  mkLine('oebb-rex41', 'REX41', "Franz-Josefs-Bahnhof – Tulln", 'sbahn', '#259D80', '#fff', [
+    ["Franz-Josefs-Bahnhof",16.36112,48.22678],
+    ["Spittelau",16.35811,48.23532],
+    ["Heiligenstadt",16.3654,48.24906],
+    ["Tulln",16.06439,48.32754]
+  ]),
+  mkLine('oebb-rex50', 'REX50', "Tullnerbach-Pressbaum – Westbahnhof", 'sbahn', '#259D83', '#fff', [
+    ["Tullnerbach-Pressbaum",16.09327,48.18609],
+    ["Hütteldorf",16.2609,48.19742],
+    ["Westbahnhof",16.3368,48.19623]
+  ]),
+  mkLine('oebb-rex51', 'REX51', "Tullnerbach-Pressbaum – Westbahnhof", 'sbahn', '#259D86', '#fff', [
+    ["Tullnerbach-Pressbaum",16.09327,48.18609],
+    ["Purkersdorf Zentrum",16.17538,48.20599],
+    ["Hütteldorf",16.26085,48.19734],
+    ["Westbahnhof",16.33665,48.1965]
+  ]),
+  mkLine('oebb-rex62', 'REX62', "Bruck/Leitha – Hauptbahnhof", 'sbahn', '#259D88', '#fff', [
+    ["Bruck/Leitha",16.78146,48.01902],
+    ["Götzendorf",16.58569,48.02578],
+    ["Gramatneusiedl",16.48958,48.03584],
+    ["Grillgasse",16.40701,48.16713],
+    ["Hauptbahnhof",16.37853,48.18507]
+  ]),
+  mkLine('oebb-rex63', 'REX63', "Bruck/Leitha – Hauptbahnhof", 'sbahn', '#259D8B', '#fff', [
+    ["Bruck/Leitha",16.78146,48.01902],
+    ["Gramatneusiedl",16.48958,48.03584],
+    ["Grillgasse",16.40701,48.16713],
+    ["Hauptbahnhof",16.37856,48.18515]
+  ]),
+  mkLine('oebb-rex64', 'REX64', "Hauptbahnhof – Bruck/Leitha", 'sbahn', '#259D8E', '#fff', [
+    ["Hauptbahnhof",16.3784,48.18464],
+    ["Grillgasse",16.40707,48.16716],
+    ["Gramatneusiedl",16.48953,48.03577],
+    ["Bruck/Leitha",16.78145,48.01893]
+  ]),
+  mkLine('oebb-rex65', 'REX65', "Ebenfurth – Hauptbahnhof", 'sbahn', '#259D90', '#fff', [
+    ["Ebenfurth",16.36279,47.8777],
+    ["Meidling",16.33392,48.17422],
+    ["Hauptbahnhof",16.37842,48.18473]
+  ]),
+  mkLine('oebb-rex81', 'REX81', "Siebenbrunn-Leopoldsdorf – Hauptbahnhof", 'sbahn', '#259D93', '#fff', [
+    ["Siebenbrunn-Leopoldsdorf",16.70371,48.24563],
+    ["Glinzendorf",16.63991,48.24215],
+    ["Raasdorf",16.58305,48.23906],
+    ["Aspern Nord",16.50474,48.23473],
+    ["Stadlau",16.44812,48.21869],
+    ["Simmering",16.41872,48.16949],
+    ["Hauptbahnhof",16.37837,48.18454]
+  ]),
+  mkLine('oebb-rex93', 'REX93', "Wiener Neustadt Hauptbahnhof – Hauptbahnhof", 'sbahn', '#259D96', '#fff', [
+    ["Wiener Neustadt Hauptbahnhof",16.23367,47.81053],
+    ["Baden",16.24267,48.00389],
+    ["Meidling",16.33382,48.17447],
+    ["Hauptbahnhof",16.37837,48.18454]
+  ]),
+  mkLine('oebb-cjx5', 'CJX5', "Tullnerfeld – Westbahnhof", 'sbahn', '#EC4E13', '#fff', [
+    ["Tullnerfeld",15.99622,48.295],
+    ["Hütteldorf",16.2609,48.19742],
+    ["Westbahnhof",16.33674,48.19632]
+  ]),
+  mkLine('oebb-cjx9', 'CJX9', "Wiener Neustadt Hauptbahnhof – Floridsdorf", 'sbahn', '#EC7513', '#fff', [
+    ["Wiener Neustadt Hauptbahnhof",16.23354,47.81056],
+    ["Baden",16.24267,48.00389],
+    ["Meidling",16.33378,48.17453],
+    ["Matzleinsdorfer Platz",16.35796,48.18013],
+    ["Hauptbahnhof",16.37515,48.18597],
+    ["Quartier Belvedere",16.38214,48.18801],
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38458,48.20558],
+    ["Praterstern",16.39245,48.21884],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40016,48.2563]
+  ]),
+  mkLine('oebb-cjx58', 'CJX58', "Tullnerfeld – Westbahnhof", 'sbahn', '#EC9C13', '#fff', [
+    ["Tullnerfeld",15.99622,48.295],
+    ["Hütteldorf",16.26094,48.1975],
+    ["Westbahnhof",16.33644,48.19692]
+  ]),
+  mkLine('oebb-r1', 'R1', "Rennweg – Gänserndorf", 'sbahn', '#6B5EBA', '#fff', [
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38443,48.20563],
+    ["Praterstern",16.39222,48.21884],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40016,48.2563],
+    ["Siemensstraße",16.42083,48.27092],
+    ["Leopoldau",16.44998,48.27765],
+    ["Süßenbrunn",16.48447,48.28531],
+    ["Deutsch-Wagram",16.56374,48.30294],
+    ["Strasshof",16.63371,48.31847],
+    ["Gänserndorf",16.73348,48.34036]
+  ]),
+  mkLine('oebb-r3', 'R3', "Bad Vöslau – Stockerau", 'sbahn', '#705EBA', '#fff', [
+    ["Bad Vöslau",16.22401,47.96988],
+    ["Baden",16.24267,48.00389],
+    ["Gumpoldskirchen",16.28445,48.0405],
+    ["Mödling",16.29545,48.08634],
+    ["Brunn-Maria Enzersdorf",16.28809,48.10552],
+    ["Liesing",16.28429,48.13468],
+    ["Atzgersdorf",16.28866,48.14702],
+    ["Hetzendorf",16.31506,48.16651],
+    ["Meidling",16.33378,48.17453],
+    ["Matzleinsdorfer Platz",16.35796,48.18013],
+    ["Hauptbahnhof",16.37515,48.18597],
+    ["Quartier Belvedere",16.38214,48.18801],
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38458,48.20558],
+    ["Praterstern",16.39245,48.21884],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40004,48.25634],
+    ["Brünner Straße",16.40346,48.26794],
+    ["Jedlersdorf",16.39684,48.27332],
+    ["Strebersdorf",16.3812,48.28602],
+    ["Langenzersdorf",16.35614,48.30638],
+    ["Bisamberg",16.34733,48.31634],
+    ["Korneuburg",16.32857,48.34346],
+    ["Stockerau",16.21411,48.38222]
+  ]),
+  mkLine('oebb-r4', 'R4', "Liesing – Stockerau", 'sbahn', '#755EBA', '#fff', [
+    ["Liesing",16.28429,48.13468],
+    ["Atzgersdorf",16.28866,48.14702],
+    ["Hetzendorf",16.31506,48.16651],
+    ["Meidling",16.33378,48.17453],
+    ["Matzleinsdorfer Platz",16.35796,48.18013],
+    ["Hauptbahnhof",16.37515,48.18597],
+    ["Quartier Belvedere",16.38214,48.18801],
+    ["Rennweg",16.38612,48.19527],
+    ["Wien Mitte-Landstraße",16.38458,48.20558],
+    ["Praterstern",16.39245,48.21884],
+    ["Traisengasse",16.38387,48.23442],
+    ["Handelskai",16.38532,48.24195],
+    ["Floridsdorf",16.40004,48.25634],
+    ["Brünner Straße",16.40346,48.26794],
+    ["Jedlersdorf",16.39684,48.27332],
+    ["Strebersdorf",16.3812,48.28602],
+    ["Langenzersdorf",16.35614,48.30638],
+    ["Bisamberg",16.34733,48.31634],
+    ["Korneuburg",16.32857,48.34346],
+    ["Stockerau",16.21411,48.38222]
+  ]),
+  mkLine('oebb-r40', 'R40', "St. Andrä-Wördern – Franz-Josefs-Bahnhof", 'sbahn', '#795EBA', '#fff', [
+    ["St. Andrä-Wördern",16.20978,48.3341],
+    ["Höflein/Donau",16.27158,48.35009],
+    ["Kritzendorf",16.2994,48.33567],
+    ["Klosterneuburg-Kierling",16.3261,48.3101],
+    ["Klosterneuburg-Weidling Bhf.",16.33504,48.29695],
+    ["Heiligenstadt",16.36552,48.24903],
+    ["Spittelau",16.35802,48.23532],
+    ["Franz-Josefs-Bahnhof",16.36072,48.22712]
+  ]),
+  mkLine('oebb-r81', 'R81', "Hauptbahnhof – Siebenbrunn-Leopoldsdorf", 'sbahn', '#7E5EBA', '#fff', [
+    ["Hauptbahnhof",16.37834,48.18445],
+    ["Simmering",16.41863,48.16956],
+    ["Stadlau",16.44829,48.21866],
+    ["Erzherzog-Karl-Straße",16.45374,48.23008],
+    ["Hirschstetten",16.46911,48.23274],
+    ["Aspern Nord",16.50473,48.23479],
+    ["Raasdorf",16.58304,48.23911],
+    ["Glinzendorf",16.63991,48.24215],
+    ["Siebenbrunn-Leopoldsdorf",16.70371,48.24563]
+  ]),
+  mkLine('oebb-r95', 'R95', "Trumau – Hauptbahnhof", 'sbahn', '#835EBA', '#fff', [
+    ["Trumau",16.33215,47.99265],
+    ["Traiskirchen Aspangbahn",16.30331,48.01793],
+    ["Möllersdorf Aspangbahn",16.31312,48.02981],
+    ["Guntramsdorf Kaiserau",16.325,48.04425],
+    ["Laxenburg-Biedermannsdorf Bhf.",16.35665,48.0775],
+    ["Maria Lanzendorf",16.41967,48.10249],
+    ["Kledering",16.43885,48.13361],
+    ["Grillgasse",16.40701,48.16713],
+    ["Hauptbahnhof",16.37856,48.18515]
+  ]),
+  mkLine('oebb-r97', 'R97', "Hauptbahnhof – Wiener Neustadt Hauptbahnhof", 'sbahn', '#885EBA', '#fff', [
+    ["Hauptbahnhof",16.37863,48.18527],
+    ["Meidling",16.33382,48.17447],
+    ["Mödling",16.29533,48.08631],
+    ["Baden",16.24261,48.00394],
+    ["Wiener Neustadt Hauptbahnhof",16.233,47.81064]
+  ]),
+  mkLine('oebb-r98', 'R98', "Wiener Neustadt Hauptbahnhof – Hauptbahnhof", 'sbahn', '#8C5EBA', '#fff', [
+    ["Wiener Neustadt Hauptbahnhof",16.23321,47.81061],
+    ["Baden",16.24267,48.00389],
+    ["Mödling",16.29545,48.08634],
+    ["Meidling",16.33385,48.17438],
+    ["Hauptbahnhof",16.37834,48.18445]
   ]),
 
   /* ---------- TRAM ---------- */
@@ -1340,7 +1786,7 @@ const VEHICLE_COUNT = { ubahn: 6, sbahn: 5, tram: 4, bus: 2 };
 let lineData = LINES.map(l => ({
   ...l,
   route: buildRoute(l.stops, l.type),
-  vehicleCount: VEHICLE_COUNT[l.type] || 2
+  vehicleCount: Math.max(1, Math.min(VEHICLE_COUNT[l.type] || 2, Math.round((l.stops?.length || 4) / 4)))
 }));
 
 /* ============ ARAÇ DURUMU (çift yönlü + canlı kalibrasyon) ============ */
@@ -1809,7 +2255,7 @@ const map = new maplibregl.Map({
 map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
 map.addControl(new maplibregl.AttributionControl({
   compact: true,
-  customAttribution: 'Datenquelle: <a href="https://data.wien.gv.at" target="_blank" rel="noopener">Stadt Wien / Wiener Linien</a> (CC BY 4.0)'
+  customAttribution: 'Datenquelle: <a href="https://data.wien.gv.at" target="_blank" rel="noopener">Stadt Wien / Wiener Linien</a> &amp; <a href="https://data.oebb.at" target="_blank" rel="noopener">ÖBB</a> (CC BY 4.0)'
 }), 'bottom-right');
 
 /* Yön oku ikonu (canvas ile çizilir, kuzeye bakar; icon-rotate ile döndürülür) */
